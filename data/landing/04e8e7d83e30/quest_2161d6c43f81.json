@@ -1,0 +1,539 @@
+{
+  "run_id": "2161d6c43f81",
+  "uploaded_files": [
+    "C:\\Users\\kogaur\\Downloads\\Projects\\Project 2- Mandellion architecture Raw-csv\\medallion-pipeline\\data\\landing\\2161d6c43f81\\products.csv",
+    "C:\\Users\\kogaur\\Downloads\\Projects\\Project 2- Mandellion architecture Raw-csv\\medallion-pipeline\\data\\landing\\2161d6c43f81\\stores.csv",
+    "C:\\Users\\kogaur\\Downloads\\Projects\\Project 2- Mandellion architecture Raw-csv\\medallion-pipeline\\data\\landing\\2161d6c43f81\\sales_data.csv"
+  ],
+  "business_intent": "Transform raw retail data into actionable business intelligence",
+  "profile_path": "C:\\Users\\kogaur\\Downloads\\Projects\\Project 2- Mandellion architecture Raw-csv\\medallion-pipeline\\data\\profiles\\2161d6c43f81\\profile_combined_2161d6c43f81.json",
+  "sttm_bronze_path": "C:\\Users\\kogaur\\Downloads\\Projects\\Project 2- Mandellion architecture Raw-csv\\medallion-pipeline\\data\\sttm\\2161d6c43f81\\sttm_bronze_2161d6c43f81.csv",
+  "status": "complete",
+  "errors": [],
+  "bronze_output_paths": [
+    "C:\\Users\\kogaur\\Downloads\\Projects\\Project 2- Mandellion architecture Raw-csv\\medallion-pipeline\\data\\bronze\\2161d6c43f81\\products_bronze.parquet",
+    "C:\\Users\\kogaur\\Downloads\\Projects\\Project 2- Mandellion architecture Raw-csv\\medallion-pipeline\\data\\bronze\\2161d6c43f81\\stores_bronze.parquet",
+    "C:\\Users\\kogaur\\Downloads\\Projects\\Project 2- Mandellion architecture Raw-csv\\medallion-pipeline\\data\\bronze\\2161d6c43f81\\sales_data_bronze.parquet"
+  ],
+  "sttm_silver_path": "C:\\Users\\kogaur\\Downloads\\Projects\\Project 2- Mandellion architecture Raw-csv\\medallion-pipeline\\data\\sttm\\2161d6c43f81\\sttm_silver_2161d6c43f81.csv",
+  "silver_output_paths": [
+    "C:\\Users\\kogaur\\Downloads\\Projects\\Project 2- Mandellion architecture Raw-csv\\medallion-pipeline\\data\\silver\\2161d6c43f81\\products_silver.parquet",
+    "C:\\Users\\kogaur\\Downloads\\Projects\\Project 2- Mandellion architecture Raw-csv\\medallion-pipeline\\data\\silver\\2161d6c43f81\\stores_silver.parquet",
+    "C:\\Users\\kogaur\\Downloads\\Projects\\Project 2- Mandellion architecture Raw-csv\\medallion-pipeline\\data\\silver\\2161d6c43f81\\sales_data_silver.parquet"
+  ],
+  "sttm_gold_path": "C:\\Users\\kogaur\\Downloads\\Projects\\Project 2- Mandellion architecture Raw-csv\\medallion-pipeline\\data\\sttm\\2161d6c43f81\\sttm_gold_2161d6c43f81.csv",
+  "gold_output_paths": [
+    "C:\\Users\\kogaur\\Downloads\\Projects\\Project 2- Mandellion architecture Raw-csv\\medallion-pipeline\\data\\gold\\2161d6c43f81\\gold_transactions.parquet",
+    "C:\\Users\\kogaur\\Downloads\\Projects\\Project 2- Mandellion architecture Raw-csv\\medallion-pipeline\\data\\gold\\2161d6c43f81\\gold_revenue_by_customer_segment.parquet",
+    "C:\\Users\\kogaur\\Downloads\\Projects\\Project 2- Mandellion architecture Raw-csv\\medallion-pipeline\\data\\gold\\2161d6c43f81\\gold_revenue_by_store_name.parquet",
+    "C:\\Users\\kogaur\\Downloads\\Projects\\Project 2- Mandellion architecture Raw-csv\\medallion-pipeline\\data\\gold\\2161d6c43f81\\gold_revenue_by_region.parquet",
+    "C:\\Users\\kogaur\\Downloads\\Projects\\Project 2- Mandellion architecture Raw-csv\\medallion-pipeline\\data\\gold\\2161d6c43f81\\gold_revenue_by_category.parquet"
+  ],
+  "report": {
+    "answer": "Motor City Plaza in the Midwest generated the highest revenue of 15337.55 dollars from 4 electronics transactions with loyal customers, averaging 595.045 dollars per unit. Harbor View in the Northeast followed with 13053.34 dollars from 3 electronics transactions with premium customers, averaging 3490.286666666667 dollars per unit. Bay Area Hub in the West shows diverse spending, with a budget segment transaction of 8311.52 dollars and a premium segment transaction of 7185.2 dollars, suggesting opportunities to target both budget and premium customers.",
+    "sql": "SELECT\n  t.store_name,\n  t.region,\n  t.category,\n  t.customer_segment,\n  COUNT(*) AS transaction_count,\n  SUM(t.quantity) AS total_quantity,\n  SUM(t.total_amount) AS total_amount,\n  AVG(t.unit_price) AS avg_unit_price\nFROM gold_transactions t\nGROUP BY t.store_name, t.region, t.category, t.customer_segment\nORDER BY total_amount DESC;",
+    "rows": [
+      {
+        "store_name": "Motor City Plaza",
+        "region": "Midwest",
+        "category": "Electronics",
+        "customer_segment": "Loyal",
+        "transaction_count": 4,
+        "total_quantity": 26.0,
+        "total_amount": 15337.55,
+        "avg_unit_price": 595.0450000000001
+      },
+      {
+        "store_name": "Harbor View",
+        "region": "Northeast",
+        "category": "Electronics",
+        "customer_segment": "Premium",
+        "transaction_count": 3,
+        "total_quantity": 14.0,
+        "total_amount": 13053.34,
+        "avg_unit_price": 3490.286666666667
+      },
+      {
+        "store_name": "Downtown Flagship",
+        "region": "Northeast",
+        "category": "Electronics",
+        "customer_segment": "Premium",
+        "transaction_count": 2,
+        "total_quantity": 2.0,
+        "total_amount": 10907.24,
+        "avg_unit_price": 5453.62
+      },
+      {
+        "store_name": "Bay Area Hub",
+        "region": "West",
+        "category": "Electronics",
+        "customer_segment": "Loyal",
+        "transaction_count": 3,
+        "total_quantity": 11.0,
+        "total_amount": 8972.23,
+        "avg_unit_price": 554.8233333333333
+      },
+      {
+        "store_name": "Bay Area Hub",
+        "region": "West",
+        "category": "Electronics",
+        "customer_segment": "Budget",
+        "transaction_count": 1,
+        "total_quantity": 8.0,
+        "total_amount": 8311.52,
+        "avg_unit_price": 1038.94
+      },
+      {
+        "store_name": "Bayfront Store",
+        "region": "Southeast",
+        "category": "Electronics",
+        "customer_segment": "Premium",
+        "transaction_count": 1,
+        "total_quantity": 8.0,
+        "total_amount": 7835.52,
+        "avg_unit_price": 979.44
+      },
+      {
+        "store_name": "Gateway West",
+        "region": "West",
+        "category": "Electronics",
+        "customer_segment": "Loyal",
+        "transaction_count": 1,
+        "total_quantity": 7.0,
+        "total_amount": 7240.59,
+        "avg_unit_price": 1034.37
+      },
+      {
+        "store_name": "Bay Area Hub",
+        "region": "West",
+        "category": "ELECTRONICS",
+        "customer_segment": "Budget",
+        "transaction_count": 1,
+        "total_quantity": 7.0,
+        "total_amount": 7218.68,
+        "avg_unit_price": 1031.24
+      },
+      {
+        "store_name": "Bay Area Hub",
+        "region": "West",
+        "category": "Elec.",
+        "customer_segment": "Prem",
+        "transaction_count": 1,
+        "total_quantity": 8.0,
+        "total_amount": 7185.2,
+        "avg_unit_price": 898.15
+      },
+      {
+        "store_name": "Harbor View",
+        "region": "Northeast",
+        "category": "Electronics",
+        "customer_segment": "Std",
+        "transaction_count": 1,
+        "total_quantity": 8.0,
+        "total_amount": 6790.64,
+        "avg_unit_price": 848.83
+      },
+      {
+        "store_name": "Peach Tree Center",
+        "region": "Southeast",
+        "category": "Home & Kitchen",
+        "customer_segment": "Budget",
+        "transaction_count": 2,
+        "total_quantity": 11.0,
+        "total_amount": 5146.99,
+        "avg_unit_price": 413.53
+      },
+      {
+        "store_name": "Windy City Center",
+        "region": "Midwest",
+        "category": "Electronics",
+        "customer_segment": "STANDARD",
+        "transaction_count": 1,
+        "total_quantity": 6.0,
+        "total_amount": 4990.32,
+        "avg_unit_price": 831.72
+      },
+      {
+        "store_name": "Bay Area Hub",
+        "region": "West",
+        "category": "Beauty",
+        "customer_segment": "Premium",
+        "transaction_count": 2,
+        "total_quantity": 11.0,
+        "total_amount": 4919.93,
+        "avg_unit_price": 427.455
+      },
+      {
+        "store_name": "Downtown Flagship",
+        "region": "Northeast",
+        "category": "Beauty",
+        "customer_segment": "Premium",
+        "transaction_count": 1,
+        "total_quantity": 8.0,
+        "total_amount": 4574.72,
+        "avg_unit_price": 571.84
+      },
+      {
+        "store_name": "Motor City Plaza",
+        "region": "Midwest",
+        "category": "Electronics",
+        "customer_segment": "Std",
+        "transaction_count": 1,
+        "total_quantity": 5.0,
+        "total_amount": 4490.85,
+        "avg_unit_price": 898.17
+      },
+      {
+        "store_name": "Westfield Mall",
+        "region": "Northeast",
+        "category": "Beauty",
+        "customer_segment": "STANDARD",
+        "transaction_count": 1,
+        "total_quantity": 6.0,
+        "total_amount": 3694.38,
+        "avg_unit_price": 615.73
+      },
+      {
+        "store_name": "Windy City Center",
+        "region": "Midwest",
+        "category": "Electronics",
+        "customer_segment": "Budget",
+        "transaction_count": 1,
+        "total_quantity": 4.0,
+        "total_amount": 3459.0,
+        "avg_unit_price": 864.75
+      },
+      {
+        "store_name": "Bay Area Hub",
+        "region": "West",
+        "category": "Electronics",
+        "customer_segment": "Premium",
+        "transaction_count": 1,
+        "total_quantity": 4.0,
+        "total_amount": 3410.36,
+        "avg_unit_price": 852.59
+      },
+      {
+        "store_name": "Westfield Mall",
+        "region": "Northeast",
+        "category": "Beauty",
+        "customer_segment": "Loyal",
+        "transaction_count": 1,
+        "total_quantity": 5.0,
+        "total_amount": 3191.4,
+        "avg_unit_price": 638.28
+      },
+      {
+        "store_name": "Windy City Center",
+        "region": "Midwest",
+        "category": "Home & Kitchen",
+        "customer_segment": "Bgt",
+        "transaction_count": 1,
+        "total_quantity": 8.0,
+        "total_amount": 3016.4,
+        "avg_unit_price": 377.05
+      },
+      {
+        "store_name": "Harbor View",
+        "region": "Northeast",
+        "category": "Electronics",
+        "customer_segment": "Standard",
+        "transaction_count": 1,
+        "total_quantity": 8.0,
+        "total_amount": 2862.0,
+        "avg_unit_price": 357.75
+      },
+      {
+        "store_name": "Motor City Plaza",
+        "region": "Midwest",
+        "category": "Home & Kitchen",
+        "customer_segment": "Prem",
+        "transaction_count": 1,
+        "total_quantity": 6.0,
+        "total_amount": 2587.26,
+        "avg_unit_price": 431.21
+      },
+      {
+        "store_name": "Westfield Mall",
+        "region": "Northeast",
+        "category": "Sports",
+        "customer_segment": "Budget",
+        "transaction_count": 3,
+        "total_quantity": 12.0,
+        "total_amount": 2571.6099999999997,
+        "avg_unit_price": 148.10333333333332
+      },
+      {
+        "store_name": "Westfield Mall",
+        "region": "Northeast",
+        "category": "Electronics",
+        "customer_segment": "Bgt",
+        "transaction_count": 1,
+        "total_quantity": 7.0,
+        "total_amount": 2554.72,
+        "avg_unit_price": 364.96
+      },
+      {
+        "store_name": "Downtown Flagship",
+        "region": "Northeast",
+        "category": "Sports",
+        "customer_segment": "standard",
+        "transaction_count": 1,
+        "total_quantity": 8.0,
+        "total_amount": 2509.36,
+        "avg_unit_price": 313.67
+      },
+      {
+        "store_name": "Gateway West",
+        "region": "West",
+        "category": "Beauty",
+        "customer_segment": "Standard",
+        "transaction_count": 1,
+        "total_quantity": 4.0,
+        "total_amount": 2485.08,
+        "avg_unit_price": 621.27
+      },
+      {
+        "store_name": "Windy City Center",
+        "region": "Midwest",
+        "category": "Home",
+        "customer_segment": "Loyal",
+        "transaction_count": 1,
+        "total_quantity": 6.0,
+        "total_amount": 2100.42,
+        "avg_unit_price": 350.07
+      },
+      {
+        "store_name": "Gateway West",
+        "region": "West",
+        "category": "Electronics",
+        "customer_segment": "Prem",
+        "transaction_count": 1,
+        "total_quantity": 8.0,
+        "total_amount": 2080.0,
+        "avg_unit_price": 260.0
+      },
+      {
+        "store_name": "Gateway West",
+        "region": "West",
+        "category": "Elec.",
+        "customer_segment": "BUDGET",
+        "transaction_count": 1,
+        "total_quantity": 5.0,
+        "total_amount": 1863.75,
+        "avg_unit_price": 372.75
+      },
+      {
+        "store_name": "Harbor View",
+        "region": "Northeast",
+        "category": "Beauty",
+        "customer_segment": "Premium",
+        "transaction_count": 1,
+        "total_quantity": 3.0,
+        "total_amount": 1812.72,
+        "avg_unit_price": 604.24
+      },
+      {
+        "store_name": "Bayfront Store",
+        "region": "Southeast",
+        "category": "Beauty",
+        "customer_segment": "Loyal",
+        "transaction_count": 2,
+        "total_quantity": 7.0,
+        "total_amount": 1786.94,
+        "avg_unit_price": 294.915
+      },
+      {
+        "store_name": "Windy City Center",
+        "region": "Midwest",
+        "category": "Home & Kitchen",
+        "customer_segment": "Premium",
+        "transaction_count": 1,
+        "total_quantity": 4.0,
+        "total_amount": 1753.92,
+        "avg_unit_price": 438.48
+      },
+      {
+        "store_name": "Motor City Plaza",
+        "region": "Midwest",
+        "category": "Home & Kitchen",
+        "customer_segment": "Standard",
+        "transaction_count": 1,
+        "total_quantity": 4.0,
+        "total_amount": 1723.96,
+        "avg_unit_price": 430.99
+      },
+      {
+        "store_name": "Gateway West",
+        "region": "West",
+        "category": "Beauty",
+        "customer_segment": "Loyal",
+        "transaction_count": 1,
+        "total_quantity": 3.0,
+        "total_amount": 1687.11,
+        "avg_unit_price": 562.37
+      },
+      {
+        "store_name": "Harbor View",
+        "region": "Northeast",
+        "category": "ELECTRONICS",
+        "customer_segment": "Standard",
+        "transaction_count": 1,
+        "total_quantity": 4.0,
+        "total_amount": 1300.44,
+        "avg_unit_price": 325.11
+      },
+      {
+        "store_name": "Downtown Flagship",
+        "region": "Northeast",
+        "category": "Apparel",
+        "customer_segment": "Premium",
+        "transaction_count": 1,
+        "total_quantity": 8.0,
+        "total_amount": 1281.28,
+        "avg_unit_price": 143.0
+      },
+      {
+        "store_name": NaN,
+        "region": NaN,
+        "category": "Apparel",
+        "customer_segment": "Standard",
+        "transaction_count": 1,
+        "total_quantity": 8.0,
+        "total_amount": 1262.56,
+        "avg_unit_price": 157.82
+      },
+      {
+        "store_name": "Bayfront Store",
+        "region": "Southeast",
+        "category": "home & kitchen",
+        "customer_segment": "Premium",
+        "transaction_count": 1,
+        "total_quantity": 6.0,
+        "total_amount": 1182.06,
+        "avg_unit_price": 197.01
+      },
+      {
+        "store_name": "Harbor View",
+        "region": "Northeast",
+        "category": "sports",
+        "customer_segment": "Budget",
+        "transaction_count": 1,
+        "total_quantity": 4.0,
+        "total_amount": 1180.8,
+        "avg_unit_price": 295.2
+      },
+      {
+        "store_name": NaN,
+        "region": NaN,
+        "category": "Electronics",
+        "customer_segment": "Loyal",
+        "transaction_count": 1,
+        "total_quantity": 5.0,
+        "total_amount": 1156.5,
+        "avg_unit_price": 231.3
+      },
+      {
+        "store_name": "Westfield Mall",
+        "region": "Northeast",
+        "category": "Beauty",
+        "customer_segment": "Budget",
+        "transaction_count": 1,
+        "total_quantity": 2.0,
+        "total_amount": 1151.26,
+        "avg_unit_price": 575.63
+      },
+      {
+        "store_name": "Downtown Flagship",
+        "region": "Northeast",
+        "category": "Apparel",
+        "customer_segment": "Loyal",
+        "transaction_count": 2,
+        "total_quantity": 11.0,
+        "total_amount": 1131.72,
+        "avg_unit_price": 92.77
+      },
+      {
+        "store_name": "Downtown Flagship",
+        "region": "Northeast",
+        "category": "Apparel",
+        "customer_segment": "PREMIUM",
+        "transaction_count": 1,
+        "total_quantity": 7.0,
+        "total_amount": 1071.98,
+        "avg_unit_price": 153.14
+      },
+      {
+        "store_name": "Gateway West",
+        "region": "West",
+        "category": "Cosmetics",
+        "customer_segment": "Loyal",
+        "transaction_count": 1,
+        "total_quantity": 5.0,
+        "total_amount": 1045.2,
+        "avg_unit_price": 209.04
+      },
+      {
+        "store_name": "Windy City Center",
+        "region": "Midwest",
+        "category": "Electronics",
+        "customer_segment": "Premium",
+        "transaction_count": 1,
+        "total_quantity": 4.0,
+        "total_amount": 1041.96,
+        "avg_unit_price": 260.49
+      },
+      {
+        "store_name": "Peach Tree Center",
+        "region": "Southeast",
+        "category": "Electronic",
+        "customer_segment": "Standard",
+        "transaction_count": 1,
+        "total_quantity": 4.0,
+        "total_amount": 1030.89,
+        "avg_unit_price": 230.11
+      },
+      {
+        "store_name": "Motor City Plaza",
+        "region": "Midwest",
+        "category": "Home & Kitchen",
+        "customer_segment": "Budget",
+        "transaction_count": 1,
+        "total_quantity": 3.0,
+        "total_amount": 1030.29,
+        "avg_unit_price": 343.43
+      },
+      {
+        "store_name": "Magnolia Square",
+        "region": "Southeast",
+        "category": "Home & Kitchen",
+        "customer_segment": "Premium",
+        "transaction_count": 2,
+        "total_quantity": 5.0,
+        "total_amount": 1018.38,
+        "avg_unit_price": 197.34
+      },
+      {
+        "store_name": "Windy City Center",
+        "region": "Midwest",
+        "category": "Sport",
+        "customer_segment": "Loyal",
+        "transaction_count": 1,
+        "total_quantity": 3.0,
+        "total_amount": 904.53,
+        "avg_unit_price": 301.51
+      },
+      {
+        "store_name": "Bayfront Store",
+        "region": "Southeast",
+        "category": "apparel",
+        "customer_segment": "Standard",
+        "transaction_count": 1,
+        "total_quantity": 6.0,
+        "total_amount": 819.24,
+        "avg_unit_price": 121.91
+      }
+    ],
+    "chart": null
+  }
+}

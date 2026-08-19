@@ -1,0 +1,45 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# Secrets
+.env
+
+# IDE settings
+.vscode/
+.idea/
+
+# Generated data (keep landing/ tracked as sample-data folder)
+data/bronze/
+data/silver/
+data/gold/
+data/profiles/
+data/sttm/
+data/traces/
+*.parquet
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Vector store
+.chroma/
+
+# User accounts + saved quest progress (local credential store)
+data/users/
+
+# Generated reports and audit logs
+reports/
+audit_logs/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Streamlit
+.streamlit/
